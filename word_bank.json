@@ -1,6 +1,6 @@
 {
   "words":[
-{"word": "regard", "meaning": "視為"},
+    {"word": "regard", "meaning": "視為"},
     {"word": "perfect", "meaning": "完美的"},
     {"word": "turn down", "meaning": "拒絕"},
     {"word": "similarly", "meaning": ["相似地", "同樣地"]},
@@ -20,7 +20,7 @@
     {"word": "tend", "meaning": "傾向"},
     {"word": "contrast", "meaning": ["對照", "對比"]},
     {"word": "protein", "meaning": "蛋白質"},
-   {"word": "classic", "meaning": "典型的"},
+    {"word": "classic", "meaning": "典型的"},
     {"word": "adapt", "meaning": "適應"},
     {"word": "complex", "meaning": "複雜的"},
     {"word": "opportunity", "meaning": ["時機", "機會"]},
@@ -37,7 +37,7 @@
     {"word": "achieve", "meaning": "實現"},
     {"word": "observe", "meaning": "觀察到"},
     {"word": "memory", "meaning": "記憶力"},
-    {"word": "designer", "meaning": "設計師"}, 
+    {"word": "designer", "meaning": "設計師"},
     {"word": "individual", "meaning": "個人"},
     {"word": "acquire", "meaning": "習得"},
     {"word": "quality", "meaning": "特質"},
@@ -50,5 +50,5 @@
     {"word": "extremely", "meaning": "非常地"},
     {"word": "criticism", "meaning": "批評"},
     {"word": "argue", "meaning": "提出理由"}
-]
+  ]
 }
