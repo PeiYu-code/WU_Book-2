@@ -1,4 +1,5 @@
-// script.js - PRINT-TO-PDF version (Chinese safe)
+// script.js - Vocabulary Quiz System (FINAL VERSION)
+
 let allWords = [];
 let selectedWords = [];
 let resultsForDownload = [];
@@ -10,7 +11,7 @@ async function loadWords() {
   allWords = data.words;
 }
 
-// Pick up to 25 words
+// Random pick up to 25 words
 function pickRandom25(words) {
   const shuffled = [...words].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(25, shuffled.length));
@@ -42,33 +43,37 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   document.getElementById("resultTitle").classList.add("hidden");
 });
 
-// Show correct answers
-document.getElementById("submitBtn").addEventListener("click", async () => {
+// Submit + grading system (100 points total)
+document.getElementById("submitBtn").addEventListener("click", () => {
   const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = "";
   document.getElementById("resultTitle").classList.remove("hidden");
 
+  let score = 0;
+  const total = selectedWords.length;
+  const pointPerQuestion = Math.round(100 / total);
+
   for (let i = 0; i < selectedWords.length; i++) {
     const word = selectedWords[i].word;
+    const correctAnswer = selectedWords[i].meaning;
     const studentAns = document.getElementById(`answer-${i}`).value.trim();
 
-    let correctChinese = "（翻譯失敗）";
+    // ✅ support single or multiple answers
+    let isCorrect = false;
 
-    try {
-      const url =
-        "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q=" +
-        encodeURIComponent(word);
-      const resp = await fetch(url);
-      const data = await resp.json();
-      if (data && data[0] && data[0][0] && data[0][0][0]) {
-        correctChinese = data[0][0][0];
-      }
-    } catch (e) {}
+    if (Array.isArray(correctAnswer)) {
+      isCorrect = correctAnswer.includes(studentAns);
+    } else {
+      isCorrect = studentAns === correctAnswer;
+    }
+
+    if (isCorrect) score += pointPerQuestion;
 
     resultsForDownload.push({
       word,
       studentAns: studentAns || "（空白）",
-      correctChinese
+      correctAnswer,
+      isCorrect
     });
 
     const row = document.createElement("div");
@@ -76,17 +81,29 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
       <p>
         <b>${word}</b><br>
         ➜ 你的答案：<span style="color:blue">${studentAns || "（空白）"}</span><br>
-        ➜ 參考中文：<span style="color:green">${correctChinese}</span>
+        ➜ 正確答案：<span style="color:green">
+          ${Array.isArray(correctAnswer) ? correctAnswer.join(" / ") : correctAnswer}
+        </span><br>
+        ➜ 判定：
+        ${isCorrect
+          ? '<span style="color:green">✔ 正確</span>'
+          : '<span style="color:red">✘ 錯誤</span>'
+        }
       </p>
       <hr>
     `;
     resultsDiv.appendChild(row);
   }
 
+  // score display
+  const scoreDiv = document.createElement("h2");
+  scoreDiv.innerText = `Score: ${score} / 100`;
+  resultsDiv.prepend(scoreDiv);
+
   document.getElementById("downloadBtn").classList.remove("hidden");
 });
 
-// Download PDF via browser print (Chinese-safe)
+// Download results (print to PDF)
 document.getElementById("downloadBtn").addEventListener("click", () => {
   const win = window.open("", "_blank");
 
@@ -113,7 +130,12 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
       <p>
         <b>${i + 1}. ${r.word}</b><br>
         你的答案：${r.studentAns}<br>
-        參考中文：${r.correctChinese}
+        正確答案：${
+          Array.isArray(r.correctAnswer)
+            ? r.correctAnswer.join(" / ")
+            : r.correctAnswer
+        }<br>
+        判定：${r.isCorrect ? "✔ 正確" : "✘ 錯誤"}
       </p>
       <hr>
     `;
