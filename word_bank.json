@@ -28,14 +28,14 @@
     {"word": "think of... as...", "meaning": "把...看作..."},
     {"word": "keep...in mind", "meaning": "記住"},
     {"word": "put up with...", "meaning": "忍受"},
-    {"word": "form", "meaning": "種類"},
+    {"word": "form", "meaning": ["種類", "類型", "形成"]},
     {"word": "entertainment", "meaning": "娛樂"},
-    {"word": "researcher", "meaning": "研究人員"},
-    {"word": "survey", "meaning": "調查"},
+    {"word": "researcher", "meaning": ["研究人員", "調查人員"]},
+    {"word": "survey", "meaning": ["調查", "調查...的意見"]},
     {"word": "teenage", "meaning": ["十幾歲的", "青少年的"]},
-    {"word": "joint", "meaning": "共同的"},
-    {"word": "achieve", "meaning": "實現"},
-    {"word": "observe", "meaning": "觀察到"},
+    {"word": "joint", "meaning": ["共同的", "聯合的"]},
+    {"word": "achieve", "meaning": ["實現", "達成"]},
+    {"word": "observe", "meaning": ["觀察到", "看到"]},
     {"word": "memory", "meaning": "記憶力"},
     {"word": "designer", "meaning": "設計師"},
     {"word": "individual", "meaning": "個人"},
@@ -49,6 +49,8 @@
     {"word": "willing", "meaning": "情願的"},
     {"word": "extremely", "meaning": "非常地"},
     {"word": "criticism", "meaning": "批評"},
-    {"word": "argue", "meaning": "提出理由"}
+    {"word": "argue", "meaning": "提出理由"},
+    {"word": "come together", "meaning": "成群結隊"},
+    {"word": "have something to offer (someone)", "meaning": "某事物(對某人)有可取之處"}
   ]
 }
